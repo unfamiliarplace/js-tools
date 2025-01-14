@@ -4,7 +4,15 @@ class Tools {
     return Math.round(percent / 100 * n);
   }
 
-  static shuffle(items) {
+  static shuffle(items, copy) {
+
+    if (typeof copy === undefined) {
+      copy = false;
+    }
+
+    if (copy) {
+      items = items.slice();
+    }
 
     // Durstenfeld shuffle stackoverflow.com/a/12646864/5228348
     for (let i = items.length - 1; i > 0; i--) {
