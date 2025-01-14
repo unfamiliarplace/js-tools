@@ -11,6 +11,9 @@ class Tools {
       const j = Tools.random(i);
       [items[i], items[j]] = [items[j], items[i]];
     }
+
+    // for good measure
+    return items;
   }
 
   static random(min, max) {
@@ -103,6 +106,21 @@ class Tools {
     top += window.scrollY;
     left += window.scrollX;
     return {'top': top, 'left': left};
+  }
+
+  static getTextareaLines = (el) => {
+
+    let lines = [];
+    for (let line of el.val().split(/\n/)) {
+      if (line.trim() !== "") {
+        lines.push(line);
+      }
+    }
+    return lines;
+  }
+
+  static setTextareaLines = (el, items) => {
+    el.val(items.join("\n"));
   }
 }
 
