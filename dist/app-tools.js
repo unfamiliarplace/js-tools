@@ -6,7 +6,7 @@ class Tools {
 
   static shuffle(items, copy) {
 
-    if (typeof copy === undefined) {
+    if (typeof copy === "undefined") {
       copy = false;
     }
 
@@ -43,11 +43,11 @@ class Tools {
 
   static randomColour(min, max) {
 
-    if ((typeof min === undefined) || (min < 0)) {
+    if ((typeof min === "undefined") || (min < 0)) {
       min = 0;
     }
 
-    if ((typeof max === undefined) || (max > 255)) {
+    if ((typeof max === "undefined") || (max > 255)) {
       max = 255;
     }
 

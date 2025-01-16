@@ -1,10 +1,28 @@
 class Option {
     el;
+    defaultValue;
 
-    constructor(el) { this.el = el; }
+    constructor(el, defaultValue) {
+        this.el = el;
+        this.defaultValue = defaultValue; // can be undefined
+    }
     value = value => {}
     option = (key, value) => {}
     disable = value => {}
+    default = value => {
+        if (typeof value === "undefined") {
+            return this.defaultValue;
+        } else {
+            this.defaultValue = value;
+        }
+    }
+
+    setToDefault = value => {
+        if (typeof value !== "undefined") {
+            this.default(value);
+        }
+        this.value(this.defaultValue);
+    }
 
     isDisabled = () => {}
   
@@ -42,7 +60,9 @@ class OptionRange extends Option {
 
 class OptionText extends Option {}
 
-class OptionSelect extends OptionText {
+class OptionChoice extends Option {}
+
+class OptionSelect extends OptionChoice {
     disable = value => {
         if (value) {
 
@@ -64,6 +84,48 @@ class OptionCheckbox extends OptionBool {
         } else {
             // set
             this.el.prop('checked', value);
+            this.el.button('refresh');
+        }
+    }
+
+    disable = value => {
+        if (value) {
+            this.el.checkboxradio('disable');
+        } else {
+            this.el.checkboxradio('enable');
+        }
+    }
+
+    isDisabled = () => {
+        return this.el.prop('disabled');
+    }
+
+    change = callback => {
+        if (typeof callback === 'undefined') {
+            return this.el.change;
+        } else {
+            this.el.change(callback);
+        }
+    }
+}
+
+class OptionRadio extends OptionChoice {
+    constructor(el) {
+        // here el should be the result of a jQuery selection using input[name="..."]
+        super(el);
+        el.checkboxradio();
+    }
+
+    value = value => {
+        // value here should be the id string of a unique radio button input
+
+        if (typeof value === 'undefined') {
+            // get
+            return this.el.filter(':checked').prop('id');
+
+        } else {
+            // set
+            $(`#${value}`).prop('checked', true);
             this.el.button('refresh');
         }
     }
