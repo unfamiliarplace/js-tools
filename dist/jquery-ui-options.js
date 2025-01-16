@@ -111,13 +111,13 @@ class OptionCheckbox extends OptionBool {
 
 class OptionRadio extends OptionChoice {
     constructor(el) {
-        // here el should be the result of a jQuery selection using input[name="..."]
+        // el should be the result of a jQuery selection using input[name="..."]
         super(el);
         el.checkboxradio();
     }
 
     value = value => {
-        // value here should be the id string of a unique radio button input
+        // value should be the id string of a unique radio button input
 
         if (typeof value === 'undefined') {
             // get
