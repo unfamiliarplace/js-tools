@@ -130,6 +130,19 @@ class Tools {
   static setTextareaLines = (el, items) => {
     el.val(items.join("\n"));
   }
+
+  static boolToInt = (bool) => {
+    return bool === true ? 1 : 0;
+  }
+
+  static normalizeWord = w => {
+    /* sadge */
+    return w.toLowerCase().replace('œ', 'oe');
+  }
+
+  static asciiizeWord = w => {
+    return normalizeWord(w).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
 }
 
 class Copy {
@@ -302,6 +315,7 @@ class _Stage {
       s.hide();
     }
   };
+
 }
 
 class _Scene {

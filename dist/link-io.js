@@ -1,5 +1,9 @@
 class LinkIO {
   maxURLLength = 4_000;
+  baseURL;
+  cbPackData;
+  cbUnpackData;
+  cbDataIsDefault;
 
   constructor(baseURL, cbPackData, cbUnpackData, cbDataIsDefault = () => false) {
     this.baseURL = baseURL;
@@ -7,31 +11,43 @@ class LinkIO {
     this.cbUnpackData = cbUnpackData;
     this.cbDataIsDefault = cbDataIsDefault;
     this.shareURL = this.baseURL;
+
+    // If this optional parameter is not supplied, assume data is never default (share URL must always be generated)
+    if (typeof cbDataIsDefault === 'undefined') {
+      this.cbDataIsDefault = () => false;
+    }
   }
 
+  /*
+  use to create and bind a new share URL button
+   */
   createCopyShareURLButton = (
     container,
     elButtonId,
     elSuccessId = '',
     elFailId = '',
     extraClasses = "",
-    buttonText = "Upload",
-    buttonTitle = "Browse for and upload file"
+    buttonText = "Copy",
+    buttonTitle = "Copy share URL"
   ) => {
     container.append(
       `<button title="${buttonTitle}" class='_copyShareURLButton ${extraClasses}' id='${elButtonId}'>${buttonText}</button>`
     );
 
-    $(`#${elId}`).click(() => {
+    $(`#${elButtonId}`).click(() => {
       this.copyShareURL(elSuccessId, elFailId)
     });
   }
 
+  /*
+  use for an existing share URL button
+   */
   bindCopyShareURLButton = (
     elButtonId,
     elSuccessId = '',
     elFailId = ''
   ) => {
+
     $(`#${elButtonId}`).click(() => {
       this.copyShareURL(elSuccessId, elFailId)
     });
@@ -60,6 +76,8 @@ class LinkIO {
       let params = this.packURLParams();
       this.shareURL = `${this.baseURL}?${params}`;
     }
+
+    return this.shareURL;
   }
 
   copyShareURL = (elSuccessId, elFailId) => {
@@ -103,6 +121,7 @@ class LinkIO {
  * 
  * (2) CB to pack is a function that returns an object mapping keys to data
  * values for your app. Optionally, you can use the compress functions here.
+ * (i.e. compress going into the dictionary, decompress coming out of it.)
  * Regular strings should not use this; in fact, I'm not clear on when
  * it actually saves space. Note that you are responsible for short keys.
  * 
