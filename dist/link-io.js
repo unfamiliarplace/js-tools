@@ -19,6 +19,11 @@ class LinkIO {
   }
 
   /*
+  TODO createCopyShareURLInput
+  with automatic linking to updateShareURL
+   */
+
+  /*
   use to create and bind a new share URL button
    */
   createCopyShareURLButton = (
@@ -109,7 +114,11 @@ class LinkIO {
     for (let k of packed.keys()) {
       data[k] = decodeURIComponent(packed.get(k));
     }
-    this.cbUnpackData(data);
+    return data;
+  }
+
+  readURL = () => {
+    this.cbUnpackData(this.unpackURLParams());
   }
 }
 
