@@ -143,6 +143,51 @@ class Tools {
   static asciiizeWord = w => {
     return normalizeWord(w).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
+
+  // https://stackoverflow.com/a/55292366
+  static trimChars(str, chars, fromStart, fromEnd) {
+    if (typeof fromStart === undefined) {
+      fromStart = true;
+    }
+
+    if (typeof fromEnd === undefined) {
+      fromEnd = true;
+    }
+
+    var start = 0,
+        end = str.length;
+
+    if (fromStart) {
+      while(start < end && chars.indexOf(str[start]) >= 0)
+        ++start;
+    }
+
+    if (fromEnd) {
+      while(end > start && chars.indexOf(str[end - 1]) >= 0)
+        --end;
+    }
+
+    return (start > 0 || end < str.length) ? str.substring(start, end) : str;
+  }
+
+  static renameObjectKeys = (o, remapping) => {
+    for (const [oldK, newK] of Object.entries(remapping)) {
+      //o[newK] = o[oldK];
+
+      if (oldK in o) {
+        Object.defineProperty(o, newK, Object.getOwnPropertyDescriptor(o, oldK));
+
+        delete o[oldK];
+      }
+    }
+  };
+
+  static swapObjectKeys = (o) => {
+    return Object.keys(o).reduce((o2, key) => {
+      o2[o[key]] = key;
+      return o2;
+    }, {});
+  };
 }
 
 class Copy {
@@ -209,57 +254,102 @@ class Copy {
     }
   };
 
+  /*
+  Optionally supply existing toast
+  A reference to one will be returned either way
+   */
+  static toast = (toast, value, noticeText) => {
+
+    if (typeof $.toast === 'undefined') {
+      console.log('jQuery toast plugin not loaded; aborting copy')
+      return;
+    }
+
+    if (value.trim().length === 0) {
+      console.log('No value to copy; aborting copy')
+      return;
+    }
+
+    if (typeof noticeText === 'undefined') {
+      noticeText = 'Copied!'
+    }
+
+    Copy.writeToClipboard(value);
+
+    if (toast !== null) {
+      toast.reset();
+    }
+
+    toast = $.toast({
+      text: noticeText,
+      icon: 'success',
+      hideAfter: 2000,
+      showHideTransition: 'slide',
+      position: 'mid-center',
+      loaderBg: '#ffffff'
+    });
+
+    return toast;
+  };
+
   // Example of CSS to go with ping
-// #copyPingNotification {
-//   font-style: italic;
-//   padding: 10px;
-//   pointer-events: none;
-//   width: 75px;
-//   border-radius: 25px;
-// }
-//
-// #copyPingNotification.pinged {
-//   background: rgba(255,255,255, 0.5);
-//   color: rgba(255, 255, 255, 1);
-// }
-//
-// #copyPingNotification:not(.pinged) {
-//   background: rgba(255,255,255, 0);
-//   color: rgba(255, 255, 255, 0);
-// }
-//
-// .fade {
-//   transition-duration: 1s;
-//   transition-timing-function: linear;
-// }
+  /*
+
+#copyPingNotification {
+  font-style: italic;
+  padding: 10px;
+  pointer-events: none;
+  width: 75px;
+  border-radius: 25px;
+}
+
+#copyPingNotification.pinged {
+  background: rgba(255,255,255, 0.5);
+  color: rgba(255, 255, 255, 1);
+}
+
+#copyPingNotification:not(.pinged) {
+  background: rgba(255,255,255, 0);
+  color: rgba(255, 255, 255, 0);
+}
+
+.fade {
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+
+*/
 
 
   // Example of CSS to go with pingButton
 
-// .buttonPing {
-//   box-sizing: border-box;
-//   position: relative;
-//   top: 0;
-//   left: 0;
-//   z-index: 99;
-//   text-align: center;
-//   font-style: italic;
-//   font-size: 14px;
-//   padding: 10px;
-//   pointer-events: none;
-//   line-height: 16px;
-//   border-radius: 5px;
-// }
-//
-// .pinged {
-//   background: #647e99;
-//   color: rgba(255, 255, 255, 1);
-// }
-//
-// .fade {
-//   transition-duration: 1s;
-//   transition-timing-function: linear;
-// }
+  /*
+.buttonPing {
+  box-sizing: border-box;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  text-align: center;
+  font-style: italic;
+  font-size: 14px;
+  padding: 10px;
+  pointer-events: none;
+  line-height: 16px;
+  border-radius: 5px;
+}
+
+.pinged {
+  background: #647e99;
+  color: rgba(255, 255, 255, 1);
+}
+
+.fade {
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+*/
+
 }
 
 class _Stage {

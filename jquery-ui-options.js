@@ -76,7 +76,11 @@ class OptionCheckbox extends OptionBool {
        el.checkboxradio();
     }
 
-    value = value => {
+    value = (value, triggerChange) => {
+        if (typeof triggerChange === 'undefined') {
+            triggerChange = true;
+        }
+
         if (typeof value === 'undefined') {
             // get
             return this.el.is(":checked");
@@ -85,6 +89,10 @@ class OptionCheckbox extends OptionBool {
             // set
             this.el.prop('checked', value);
             this.el.button('refresh');
+
+            if (triggerChange) {
+                this.change();
+            }
         }
     }
 
@@ -102,7 +110,7 @@ class OptionCheckbox extends OptionBool {
 
     change = callback => {
         if (typeof callback === 'undefined') {
-            return this.el.change;
+            this.el.change();
         } else {
             this.el.change(callback);
         }
