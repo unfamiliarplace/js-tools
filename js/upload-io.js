@@ -38,7 +38,7 @@ class UploadButton {
       `<button title="${buttonTitle}" class='_uploadButton ${extraClasses}' id='${elId}'>${buttonText}</button>`
     );
 
-    UploadButton.bindElement($(`#${elId}`));
+    UploadButton.bind($(`#${elId}`));
 
     let button = $(`#${elId}`);
   };
