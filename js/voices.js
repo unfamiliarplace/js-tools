@@ -205,7 +205,7 @@ class Speech {
         let prefixToCodes = {};
 
         // tuples of the form [language code, nice name]
-        let voiceLanguages = Speech.getLanguages();
+        let voiceLanguages = Speech.getVoiceLanguages();
 
         // Create a list of prefixes and a map of prefixes to the prefix-suffix keys
         let prefix;
