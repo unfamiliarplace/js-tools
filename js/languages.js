@@ -27,9 +27,25 @@ class Language {
             return '';
         }        
     }
+
+    formatBilingualName = () => {
+        if (this.engName === lang.ownName) {
+            return this.ownName;
+        } else {
+            return `${this.engName} / ${this.ownName}`;
+        }
+    }
 }
 
 class Languages {
+    static getLanguageByCode = (code) => {
+        for (const lang of Languages.languages) {
+            if (lang.code === code) {
+                return lang;
+            }
+        }
+    }
+
     static populateLanguageSelect = (select, selectNull, triggerChange) => {
         if (typeof selectNull === 'undefined') {
             selectNull = true;
@@ -54,13 +70,7 @@ class Languages {
 
         for (let lang of sortedLanguages) {
             optionValue = lang.code;
-
-            if (lang.engName === lang.ownName) {
-                optionText =  lang.ownName;
-            } else {
-                optionText = `${lang.engName} / ${lang.ownName}`;
-            }
-
+            optionText = lang.formatBilingualName();
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
         }
