@@ -121,6 +121,8 @@ class Speech {
 
     If they supply a prefix-suffix code and a prefix does not exist, but a prefix-suffix does, return the first one.
         e.g. they supply fr-ca. It does not exist, but fr-fr does: return fr-fr.
+
+     If none of the above, return null.
      **/
     static getClosestLanguage = (needleCode) => {
         let codes = [];
@@ -155,7 +157,8 @@ class Speech {
             return prefixToCodes[needlePrefix][0];
         }
 
-        // else undefined
+        // else null
+        return null;
     }
 
     static makeUtterance = (text, langCode, voiceName, volume, rate, pitch) => {
