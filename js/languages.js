@@ -29,7 +29,7 @@ class Language {
     }
 
     formatBilingualName = () => {
-        if (this.engName === lang.ownName) {
+        if (this.engName === this.ownName) {
             return this.ownName;
         } else {
             return `${this.engName} / ${this.ownName}`;
