@@ -54,7 +54,13 @@ class Languages {
 
         for (let lang of sortedLanguages) {
             optionValue = lang.code;
-            optionText = `${lang.engName} / ${lang.ownName}`;
+
+            if (lang.engName === lang.ownName) {
+                optionText =  lang.ownName;
+            } else {
+                optionText = `${lang.engName} / ${lang.ownName}`;
+            }
+
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
         }
