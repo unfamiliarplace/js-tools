@@ -17,7 +17,7 @@ class Speech {
     /**
      Return a list of language codes
      */
-    static getVoiceLanguages = () => {
+    static getVoiceLanguageCodes = () => {
         let codes = new Set();
         for (let voice of Speech.getVoices()) {
             codes.add(voice.lang);
@@ -90,11 +90,12 @@ class Speech {
         option = `<option value="--">--</option>`;
         select.append(option);
 
-        let languages = Speech.getVoiceLanguages();
+        let languages = Speech.getVoiceLanguageCodes();
+        let languagesModuleActive = (typeof Languages !== 'undefined');
 
         for (let langCode of languages) {
             optionValue = langCode;
-            optionText = langCode;
+            optionText = (languagesModuleActive) ? Languages.getLanguageByCode(langCode).formatBilingualName() : langCode;
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
         }
@@ -205,11 +206,11 @@ class Speech {
         let prefixToCodes = {};
 
         // tuples of the form [language code, nice name]
-        let voiceLanguages = Speech.getVoiceLanguages();
+        let voiceLanguageCodes = Speech.getVoiceLanguageCodes();
 
         // Create a list of prefixes and a map of prefixes to the prefix-suffix keys
         let prefix;
-        for (let langCode of voiceLanguages) {
+        for (let langCode of voiceLanguageCodes) {
             codes.push(langCode);
 
             prefix = Speech.prefix(langCode);
