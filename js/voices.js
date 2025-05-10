@@ -83,9 +83,13 @@ class Speech {
         }
     };
 
-    static populateVoiceSelectForLanguage = (select, langCode, selectFirst) => {
+    static populateVoiceSelectForLanguage = (select, langCode, selectFirst, triggerChange) => {
         if (typeof selectFirst === 'undefined') {
             selectFirst = true;
+        }
+
+        if (typeof triggerChange === 'undefined') {
+            triggerChange = true;
         }
 
         let option, optionValue, optionText;
@@ -105,10 +109,13 @@ class Speech {
                 option = `<option value="${optionValue}">${optionText}</option>`;
                 select.append(option);
             }
+        }
 
-            // Automatically select the first one
-            if (!! selectFirst) {
-                select.val(voices[0].name).change();
+        // Automatically select the first one and trigger a change
+        if (!! selectFirst) {
+            select.val(voices[0].name);
+            if (!! triggerChange) {
+                select.change();
             }
         }
     };
