@@ -46,9 +46,15 @@ class Languages {
         option = `<option value="--">--</option>`;
         select.append(option);
 
-        for (let lang of Languages.languages) {
+        // Sort alphabetically by English name
+        let sortedLanguages = Languages.languages;
+        sortedLanguages.sort((a, b) => {
+            a.engName.localeCompare(b.engName);
+        })
+
+        for (let lang of sortedLanguages) {
             optionValue = lang.code;
-            optionText = lang.ownName;
+            optionText = `${lang.engName} / ${lang.ownName}`;
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
         }
