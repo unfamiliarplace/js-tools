@@ -13,11 +13,11 @@ class Speech {
     static getVoices = () => {
         return speechSynthesis.getVoices();
     }
-    
+
     /**
-    Return a list of language codes
-    */
-    static getLanguages = () => {
+     Return a list of language codes
+     */
+    static getVoiceLanguages = () => {
         let codes = new Set();
         for (let voice of Speech.getVoices()) {
             codes.add(voice.lang);
@@ -67,7 +67,22 @@ class Speech {
         return voices;
     };
 
-    static populateLanguageSelect = (select) => {
+    /**
+     * Only languages used by the available speechSynthesis voices.
+     *
+     * @param select
+     * @param selectFirst
+     * @param triggerChange
+     */
+    static populateVoiceLanguageSelect = (select, selectFirst, triggerChange) => {
+        if (typeof selectFirst === 'undefined') {
+            selectFirst = true;
+        }
+
+        if (typeof triggerChange === 'undefined') {
+            triggerChange = true;
+        }
+
         let option, optionValue, optionText;
 
         select.empty();
@@ -75,13 +90,59 @@ class Speech {
         option = `<option value="--">--</option>`;
         select.append(option);
 
-        for (let langCode of Speech.getVoiceLanguages()) {
+        let languages = Speech.getVoiceLanguages();
+
+        for (let langCode of languages) {
             optionValue = langCode;
             optionText = langCode;
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
         }
+
+        // Automatically select the first one and trigger a change
+        if (!!selectFirst) {
+            select.val(languages[0]);
+            if (!!triggerChange) {
+                select.change();
+            }
+        }
     };
+
+    static populateVoiceSelect = (select, selectNull, triggerChange) => {
+        if (typeof selectNull === 'undefined') {
+            selectNull = true;
+        }
+
+        if (typeof triggerChange === 'undefined') {
+            triggerChange = true;
+        }
+
+        let option, optionValue, optionText;
+
+        select.empty();
+
+        let voices = Speech.getVoices(langCode);
+
+        if (voices.length === 0) {
+            option = `<option value="--">--</option>`;
+            select.append(option);
+
+        } else {
+            for (let voice of voices) {
+                optionValue = voice.name;
+                optionText = voice.name.split(" - ")[0];
+                option = `<option value="${optionValue}">${optionText}</option>`;
+                select.append(option);
+            }
+        }
+
+        if (!!selectNull) {
+            select.val('--');
+            if (!!triggerChange) {
+                select.change();
+            }
+        }
+    }
 
     static populateVoiceSelectForLanguage = (select, langCode, selectFirst, triggerChange) => {
         if (typeof selectFirst === 'undefined') {
@@ -112,29 +173,29 @@ class Speech {
         }
 
         // Automatically select the first one and trigger a change
-        if (!! selectFirst) {
+        if (!!selectFirst) {
             select.val(voices[0].name);
-            if (!! triggerChange) {
+            if (!!triggerChange) {
                 select.change();
             }
         }
     };
 
     /**
-    Some language codes have prefix and suffix, e.g. fr-ca.
-    For others, the code is only the prefix.
+     Some language codes have prefix and suffix, e.g. fr-ca.
+     For others, the code is only the prefix.
 
-    Caller supplies a code. If it matches an available code exactly, return it.
-        e.g. they supply fr and fr exists. Or they supply fr-ca and fr-ca exists.
+     Caller supplies a code. If it matches an available code exactly, return it.
+     e.g. they supply fr and fr exists. Or they supply fr-ca and fr-ca exists.
 
-    If they supply a prefix and a prefix-suffix code exists, return the first one.
-        e.g. they supply fr. It does not exist, but fr-ca does. Return fr-ca.
+     If they supply a prefix and a prefix-suffix code exists, return the first one.
+     e.g. they supply fr. It does not exist, but fr-ca does. Return fr-ca.
 
-    If the supply a prefix-suffix code and a prefix-only code exists, return it.
-        e.g. they supply fr-ca. It does not exist, but fr does: return fr.
+     If the supply a prefix-suffix code and a prefix-only code exists, return it.
+     e.g. they supply fr-ca. It does not exist, but fr does: return fr.
 
-    If they supply a prefix-suffix code and a prefix does not exist, but a prefix-suffix does, return the first one.
-        e.g. they supply fr-ca. It does not exist, but fr-fr does: return fr-fr.
+     If they supply a prefix-suffix code and a prefix does not exist, but a prefix-suffix does, return the first one.
+     e.g. they supply fr-ca. It does not exist, but fr-fr does: return fr-fr.
 
      If none of the above, return null.
      **/
@@ -154,7 +215,7 @@ class Speech {
             prefix = Speech.prefix(langCode);
             prefixes.push(prefix);
 
-            if (! (prefix in prefixToCodes)) {
+            if (!(prefix in prefixToCodes)) {
                 prefixToCodes[prefix] = [];
             }
             prefixToCodes[prefix].push(langCode);

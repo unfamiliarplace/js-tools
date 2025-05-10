@@ -46,18 +46,18 @@ class Languages {
         option = `<option value="--">--</option>`;
         select.append(option);
 
-        if (!! selectNull) {
-            select.val('--');
-            if (!! triggerChange) {
-                select.change();
-            }
-        }
-
         for (let lang of Languages.languages) {
             optionValue = lang.code;
             optionText = lang.ownName;
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
+        }
+
+        if (!! selectNull) {
+            select.val('--');
+            if (!! triggerChange) {
+                select.change();
+            }
         }
     };
 
