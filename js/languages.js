@@ -38,7 +38,7 @@ class Language {
 }
 
 class Languages {
-    static getLanguageByCode = (code) => {
+    static getLanguageByCode = code => {
         for (const lang of Languages.languages) {
             if (lang.code === code) {
                 return lang;
