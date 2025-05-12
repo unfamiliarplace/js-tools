@@ -91,11 +91,12 @@ class Speech {
         select.append(option);
 
         let languages = Speech.getVoiceLanguageCodes();
-        let languagesModuleActive = (typeof Languages !== 'undefined');
+        let languageNamesAvailable = (typeof Languages !== 'undefined') && (typeof Languages.getLanguageByCode !== 'undefined');
+        console.log(Languages);
 
         for (let langCode of languages) {
             optionValue = langCode;
-            optionText = (languagesModuleActive) ? Languages.getLanguageByCode(langCode).formatBilingualName() : langCode;
+            optionText = (languageNamesAvailable) ? Languages.getLanguageByCode(langCode).formatBilingualName() : langCode;
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
         }
