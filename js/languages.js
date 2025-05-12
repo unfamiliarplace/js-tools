@@ -158,13 +158,13 @@ class Languages {
         new Language('zu', 'Zulu', 'Zulu', '🇿🇦'),
         new Language('az', 'Azərbaycan dili', 'Azerbaijani', '🇦🇿'),
         new Language('cs', 'Čeština', 'Czech', '🇨🇿'),
+        new Language('zh', '中文（简体）', 'Chinese', '🇨🇳'),
         new Language('zh-HK', '中文（香港）', 'Chinese (Hong Kong)', '🇭🇰'),
         new Language('zh-TW', '中文（繁體）', 'Chinese (Taiwan)', '🇹🇼'),
-        new Language('zh', '中文（简体）', 'Chinese', '🇨🇳'),
         new Language('el', 'Ελληνικά', 'Greek', '🇬🇷'),
+        new Language('es', 'Español (España)', 'Spanish (Spain)', '🇪🇸'),
         new Language('es-419', 'Español (Latinoamérica)', 'Spanish (Latin America)', '🌎'),
         new Language('es-US', 'Español (Estados Unidos)', 'Spanish (United States', '🇺🇸'),
-        new Language('es', 'Español (España)', 'Spanish (Spain)', '🇪🇸'),
         new Language('sv', 'Svenska', 'Swedish', '🇸🇪'),
     ]
 }
