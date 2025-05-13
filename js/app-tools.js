@@ -436,7 +436,7 @@ class _Scene {
 
   hide = () => {
     this.panel.addClass("hide");
-    this.panel.css("z-index", "10");
+    this.panel.css("z-index", "10"); // TODO this z-index stuff is bad
     this.toggler.css("z-index", "11");
   };
 
