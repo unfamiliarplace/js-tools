@@ -90,11 +90,11 @@ class Speech {
         option = `<option value="--">--</option>`;
         select.append(option);
 
-        let languages = Speech.getVoiceLanguageCodes();
+        let voiceLangCodes = Speech.getVoiceLanguageCodes();
         let languageNamesAvailable = (typeof Languages !== 'undefined') && (typeof Languages.getLanguageByCode !== 'undefined');
-        console.log(Languages);
+        console.log(voiceLangCodes);
 
-        for (let langCode of languages) {
+        for (let langCode of voiceLangCodes) {
             optionValue = langCode;
             optionText = (languageNamesAvailable) ? Languages.getLanguageByCode(langCode).formatBilingualName() : langCode;
             option = `<option value="${optionValue}">${optionText}</option>`;
@@ -103,7 +103,7 @@ class Speech {
 
         // Automatically select the first one and trigger a change
         if (!!selectFirst) {
-            select.val(languages[0]);
+            select.val(voiceLangCodes[0]);
             if (!!triggerChange) {
                 select.change();
             }
