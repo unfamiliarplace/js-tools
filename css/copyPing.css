@@ -1,0 +1,55 @@
+/*
+Example of CSS to go with ping from Tools.Copy
+ */
+
+#copyPingNotification {
+font-style: italic;
+padding: 10px;
+pointer-events: none;
+width: 75px;
+border-radius: 25px;
+}
+
+#copyPingNotification.pinged {
+background: rgba(255,255,255, 0.5);
+color: rgba(255, 255, 255, 1);
+}
+
+#copyPingNotification:not(.pinged) {
+background: rgba(255,255,255, 0);
+color: rgba(255, 255, 255, 0);
+}
+
+.fade {
+transition-duration: 1s;
+transition-timing-function: linear;
+}
+
+/*
+Example of CSS to go with pingButton from Tools.Copy
+ */
+
+.buttonPing {
+box-sizing: border-box;
+position: relative;
+top: 0;
+left: 0;
+z-index: 99;
+text-align: center;
+font-style: italic;
+font-size: 14px;
+padding: 10px;
+pointer-events: none;
+line-height: 16px;
+border-radius: 5px;
+}
+
+.pinged {
+background: #647e99;
+color: rgba(255, 255, 255, 1);
+}
+
+.fade {
+transition-duration: 1s;
+transition-timing-function: linear;
+}
