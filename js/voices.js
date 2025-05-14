@@ -91,8 +91,7 @@ class Speech {
         select.append(option);
 
         let voiceLangCodes = Speech.getVoiceLanguageCodes();
-        let languageNamesAvailable = (typeof Languages !== 'undefined') && (typeof Languages.getLanguageByCode !== 'undefined');
-        console.log(voiceLangCodes);
+        let languageNamesAvailable = (typeof Languages !== 'undefined');
 
         for (let langCode of voiceLangCodes) {
             optionValue = langCode;
