@@ -306,9 +306,36 @@ class Stage {
     this.default = null;
   }
 
+  /**
+   * Add a ready-made scene to this stage, keying it by name.
+   * @param s
+   */
   addScene = (s) => {
     this.scenes[s.name] = s;
   };
+
+  /**
+   * Make and add a scene given a name, jQ panel selector, and jQ toggle selector (optional).
+   *
+   * @param name
+   * @param panelSelector
+   * @param toggleSelector
+   */
+  createScene = (name, panelSelector, toggleSelector) => {
+    let s = new Scene(name, this, panelSelector, toggleSelector);
+    this.addScene(s);
+  }
+
+  /**
+   * Make and add a list of scenes using an array of objects with the scene data keys and values.
+   *
+   * @param sceneData
+   */
+  createScenes = (sceneData) => {
+    for (let scene of sceneData) {
+      this.createScene(scene.name, scene.panelSelector, scene.toggleSelector);
+    }
+  }
 
   setDefault = (sid) => {
     this.default = sid;
@@ -367,10 +394,21 @@ class Scene {
     this.panelSelector = panelSelector;
     this.toggleSelector = toggleSelector;
 
-    this.bindToggle();
+    if (!! this.toggleSelector) {
+      this.bindToggle();
+    }
   }
 
-  bindToggle = () => {
+  /**
+   * Bind a toggle element's click event to toggle this scene.
+   * Uses this Scene's selector by default, but can be manually supplied one.
+   * @param toggleSelector
+   */
+  bindToggle = (toggleSelector) => {
+    if (typeof toggleSelector === 'undefined') {
+      toggleSelector = this.toggleSelector;
+    }
+
     $(toggleSelector).click(() => {
       this.stage.toggle(this.name);
     });
@@ -468,36 +506,3 @@ class Jukebox {
     }
   }
 }
-
-class Scene {
-  name;
-  light;
-  panel;
-  active;
-
-  constructor(panel, name, light) {
-    this.panel = panel;
-    this.name = name;
-    this.light = light;
-    this.active = false;
-  }
-
-  show() {
-    this.panel.show();
-    this.active = true;
-  }
-
-  hide() {
-    this.panel.hide();
-    this.active = false;
-  }
-
-  toggle() {
-    if (this.active) {
-      this.hide();
-    } else {
-      this.show();
-    }
-  }
-}
-
