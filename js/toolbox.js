@@ -98,7 +98,7 @@ class DOMTools {
 
   static disableInput(disable) {
     $("input, button").prop("disabled", disable);
-    Tools.waitCursor(disable);
+    DOMTools.waitCursor(disable);
   }
 
   static toggleDisableInput(ms) {
@@ -108,13 +108,13 @@ class DOMTools {
     });
 
     $("input, button").prop("disabled", true);
-    Tools.waitCursor(true);
+    DOMTools.waitCursor(true);
 
     setTimeout(() => {
       $("input, button").prop('disabled', function (i, v) {
         return states[i];
       });
-      Tools.waitCursor(false);
+      DOMTools.waitCursor(false);
     }, ms);
   }
 
@@ -186,9 +186,9 @@ class Random {
       max = 255;
     }
 
-    let r = Tools.random(min, max);
-    let g = Tools.random(min, max);
-    let b = Tools.random(min, max);
+    let r = Random.random(min, max);
+    let g = Random.random(min, max);
+    let b = Random.random(min, max);
 
     return [r, g, b];
   }
