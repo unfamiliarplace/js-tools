@@ -14,7 +14,7 @@ class JSTools {
   }
 
   static asciiizeWord = w => {
-    return normalizeWord(w).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return JSTools.normalizeWord(w).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
 
   // https://stackoverflow.com/a/55292366
@@ -151,7 +151,7 @@ class Random {
 
     // Durstenfeld shuffle stackoverflow.com/a/12646864/5228348
     for (let i = items.length - 1; i > 0; i--) {
-      const j = Tools.random(i);
+      const j = Random.random(i);
       [items[i], items[j]] = [items[j], items[i]];
     }
 
