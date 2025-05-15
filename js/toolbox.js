@@ -1,4 +1,4 @@
-class Tools {
+class JSTools {
 
   static proportion(percent, n) {
     return Math.round(percent / 100 * n);
