@@ -40,8 +40,8 @@
 /* checkboxradio */
 
 .ui-checkboxradio-label {
-    background: #eee;
-    color: #111;
+    background: none;
+    color: #fff;
 }
 
 .ui-checkboxradio-label .ui-checkboxradio-icon {
@@ -54,22 +54,19 @@
     color: white;
 }
 
+.ui-checkboxradio-label.ui-checkboxradio-checked {
+    background: #fff;
+    border-color: #fff;
+    color: #221d1d;
+}
+
 .ui-checkboxradio-label:hover {
-    background: #ccc !important;
-    color: #222 !important;
-    border-color: #067e43 !important;
+    background: rgba(255, 255, 255, .25) !important;
+    color: #fff !important;
+    border-color: #fff !important;
 }
 
 .ui-checkboxradio-label.ui-checkboxradio-checked:hover {
-    background: #143023 !important;
+    background: rgba(0, 0, 0, 0.2) !important;
     color: #fff !important;
-}
-
-.ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon,
-.ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
-    width: 16px;
-    height: 16px;
-    /*border: none;*/
-    border-color: #fff;
-    background: #7c7c7c;
 }
