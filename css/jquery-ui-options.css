@@ -70,3 +70,8 @@
     background: rgba(0, 0, 0, 0.2) !important;
     color: #fff !important;
 }
+
+.ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon, .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
+    width: 16px;
+    height: 16px;
+}
