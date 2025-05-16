@@ -61,14 +61,15 @@
 }
 
 .ui-checkboxradio-label:hover {
-    background: rgba(255, 255, 255, .25) !important;
+    background: rgba(255, 255, 255, .2) !important;
     color: #fff !important;
     border-color: #fff !important;
 }
 
 .ui-checkboxradio-label.ui-checkboxradio-checked:hover {
-    background: rgba(0, 0, 0, 0.2) !important;
+    background: rgba(0, 0, 0, 0.65) !important;
     color: #fff !important;
+    border: 1px solid white;
 }
 
 .ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon, .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
