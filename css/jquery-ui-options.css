@@ -27,14 +27,14 @@
 }
 
 .ui-slider .ui-slider-handle:hover {
-    background: #056e3a !important;
+    background: rgba(255, 255, 255, 0.2);
     color: white !important;
 }
 
 .ui-slider .ui-slider-handle.ui-state-active {
-    background: #056e3a !important;
-    color: white !important;
-    border-color: #067e43 !important;
+    background: #fff !important;
+    color: #222 !important;
+    border-color: #fff !important;
 }
 
 /* checkboxradio */
@@ -49,9 +49,9 @@
 }
 
 .ui-checkboxradio-label.ui-checkboxradio-checked {
-    background: #023b1f;
-    border-color: #067e43;
-    color: white;
+    background: #fff;
+    border-color: #fff;
+    color: #222;
 }
 
 .ui-checkboxradio-label.ui-checkboxradio-checked {
