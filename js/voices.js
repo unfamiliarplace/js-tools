@@ -74,13 +74,17 @@ class Speech {
      * @param selectFirst
      * @param triggerChange
      */
-    static populateVoiceLanguageSelect = (select, selectFirst, triggerChange) => {
+    static populateVoiceLanguageSelect = (select, selectFirst, triggerChange, useNiceLanguageNames) => {
         if (typeof selectFirst === 'undefined') {
             selectFirst = true;
         }
 
         if (typeof triggerChange === 'undefined') {
             triggerChange = true;
+        }
+
+        if (typeof useNiceLanguageNames === 'undefined') {
+            useNiceLanguageNames = true;
         }
 
         let option, optionValue, optionText;
@@ -91,11 +95,20 @@ class Speech {
         select.append(option);
 
         let voiceLangCodes = Speech.getVoiceLanguageCodes();
-        let languageNamesAvailable = (typeof Languages !== 'undefined');
 
+        let language;
         for (let langCode of voiceLangCodes) {
             optionValue = langCode;
-            optionText = (languageNamesAvailable) ? Languages.getLanguageByCode(langCode).formatBilingualName() : langCode;
+            optionText = langCode;
+
+            // If languages.js is available, use its nicer name
+            if (useNiceLanguageNames && (!! Languages)) {
+                language = Languages.getLanguageByCode(langCode);
+                if (!! language) {
+                    optionText = language.formatBilingualName();
+                }
+            }
+
             option = `<option value="${optionValue}">${optionText}</option>`;
             select.append(option);
         }
