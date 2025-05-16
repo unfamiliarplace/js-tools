@@ -1,0 +1,200 @@
+/* General */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#dropzoneContainer, #dropzone {
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+    gap: 20px;
+}
+
+/* basics */
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.flexRowCenter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.flexCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.flexColCenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#main {
+    padding: 6px;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+#footer {
+    color: #eee;
+    width: 100%;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 6px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    border-top: 1px solid #fff;
+}
+
+.panel {
+    overflow-y: scroll;
+    height: 100%;
+    width: 100%;
+}
+
+#header h1 {
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 15px;
+}
+
+a {
+    color: #0adcff;
+}
+
+.hide {
+    visibility: hidden;
+    display: none;
+}
+
+.swappable {
+    height: inherit;
+    width: inherit;
+}
+
+#header {
+    padding-top: 20px;
+    background: rgba(0, 0, 0, .25);
+}
+
+.subtitlePanel {
+    text-align: center;
+    padding: 10px 0;
+}
+
+hr {
+    width: 100%;
+    border-bottom: 1px solid white;
+}
+
+.textDark {
+    color: #222;
+}
+
+.textDark a {
+    color: var(--bg-color);
+}
+
+#footerContent {
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.footerBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.footerBlock > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 20px;
+}
+
+.buttonFooter {
+    padding: 5px 10px;
+    margin-right: 10px;
+}
+
+/* Button base */
+
+.buttonBase {
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    min-height: 30px;
+    cursor: pointer;
+}
+
+.buttonBase.buttonDark {
+    color: #222;
+    border-color: #222;
+}
+
+.buttonEffects:hover {
+    background: #fff !important;
+    color: #111 !important;
+}
+
+.buttonEffects:active {
+    background: #aaa !important;
+    color: #111 !important;
+}
+
+.buttonEffects.buttonDark:hover {
+    background: #222 !important;
+    color: #fff !important;
+}
+
+.buttonEffects.buttonDark:active {
+    background: #555 !important;
+    color: #fff !important;
+}
+
+.buttonEffects:disabled {
+    color: #ddd !important;
+    border: 1px solid #ddd !important;
+    cursor: default !important;
+    filter: brightness(0.65) !important;
+}
+
+.buttonEffects:disabled:hover, .buttonEffects:disabled:active {
+    background: none !important;
+    color: #ddd !important;
+}
+
+/* Scrollbar */
+
+.hideScrollbar {
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+.hideScrollbar::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}

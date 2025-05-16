@@ -1,0 +1,75 @@
+/* fixing jquery ui slider */
+
+.sliderContainer {
+    /*width: 250x;*/ /* This should be changed but needs a value */
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #c5c5c5;
+}
+
+.ui-slider {
+    width: 208px;
+    border: none !important;
+}
+
+.ui-slider, .ui-slider .ui-slider-handle {
+    height: 28px;
+}
+
+.ui-slider .ui-slider-handle {
+    margin-left: -1px;
+    top: -1px;
+    line-height: 26px;
+    width: 40px;
+    text-align: center;
+    background: #023b1f;
+    color: white;
+}
+
+.ui-slider .ui-slider-handle:hover {
+    background: #056e3a !important;
+    color: white !important;
+}
+
+.ui-slider .ui-slider-handle.ui-state-active {
+    background: #056e3a !important;
+    color: white !important;
+    border-color: #067e43 !important;
+}
+
+/* checkboxradio */
+
+.ui-checkboxradio-label {
+    background: #eee;
+    color: #111;
+}
+
+.ui-checkboxradio-label .ui-checkboxradio-icon {
+    border: 1px solid #aaa;
+}
+
+.ui-checkboxradio-label.ui-checkboxradio-checked {
+    background: #023b1f;
+    border-color: #067e43;
+    color: white;
+}
+
+.ui-checkboxradio-label:hover {
+    background: #ccc !important;
+    color: #222 !important;
+    border-color: #067e43 !important;
+}
+
+.ui-checkboxradio-label.ui-checkboxradio-checked:hover {
+    background: #143023 !important;
+    color: #fff !important;
+}
+
+.ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon,
+.ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
+    width: 16px;
+    height: 16px;
+    /*border: none;*/
+    border-color: #fff;
+    background: #7c7c7c;
+}
