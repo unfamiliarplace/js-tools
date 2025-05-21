@@ -151,7 +151,7 @@ class Random {
 
     // Durstenfeld shuffle stackoverflow.com/a/12646864/5228348
     for (let i = items.length - 1; i > 0; i--) {
-      const j = Random.random(i);
+      const j = Random.integer(i);
       [items[i], items[j]] = [items[j], items[i]];
     }
 
@@ -159,7 +159,14 @@ class Random {
     return items;
   }
 
-  static random(min, max) {
+  /**
+   * Return a random integer between min and max.
+   * If only one of min or max is given, it is treated as max.
+   * @param min
+   * @param max
+   * @returns {number}
+   */
+  static integer(min, max) {
     if (typeof max === 'undefined') {
       max = min;
       min = 0;
@@ -167,7 +174,7 @@ class Random {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  static randomChoice(arr, pop) {
+  static choice(arr, pop) {
     let i = Math.floor(Math.random() * arr.length);
     if ((typeof pop !== 'undefined') && pop) {
       return arr.splice(i, 1);
@@ -176,7 +183,7 @@ class Random {
     }
   }
 
-  static randomColour(min, max) {
+  static colour(min, max) {
 
     if ((typeof min === "undefined") || (min < 0)) {
       min = 0;
@@ -191,6 +198,21 @@ class Random {
     let b = Random.random(min, max);
 
     return [r, g, b];
+  }
+
+  // Alias for backwards compatibility
+  static randomChoice(arr, pop) {
+    return Random.choice(arr, pop);
+  }
+
+  // Alias for backwards compatibility
+  static random(min, max) {
+    return Random.integer(min, max);
+  }
+
+  // Alias for backwards compatibility
+  static randomColour(min, max) {
+    return Random.colour(min, max);
   }
 }
 
