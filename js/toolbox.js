@@ -1,5 +1,12 @@
 class JSTools {
 
+  static removeFromArray = (arr, val) => {
+    let index = arr.indexOf(val);
+    if (index !== -1) {
+      arr.splice(index, 1);
+    }
+  }
+
   static proportion(percent, n) {
     return Math.round(percent / 100 * n);
   }
