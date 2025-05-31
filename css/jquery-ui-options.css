@@ -27,21 +27,21 @@
 }
 
 .ui-slider .ui-slider-handle:hover {
-    background: #056e3a !important;
+    background: rgba(255, 255, 255, 0.2);
     color: white !important;
 }
 
 .ui-slider .ui-slider-handle.ui-state-active {
-    background: #056e3a !important;
-    color: white !important;
-    border-color: #067e43 !important;
+    background: #fff !important;
+    color: #222 !important;
+    border-color: #fff !important;
 }
 
 /* checkboxradio */
 
 .ui-checkboxradio-label {
-    background: #eee;
-    color: #111;
+    background: none;
+    color: #fff;
 }
 
 .ui-checkboxradio-label .ui-checkboxradio-icon {
@@ -49,27 +49,30 @@
 }
 
 .ui-checkboxradio-label.ui-checkboxradio-checked {
-    background: #023b1f;
-    border-color: #067e43;
-    color: white;
+    background: #fff;
+    border-color: #fff;
+    color: #222;
+}
+
+.ui-checkboxradio-label.ui-checkboxradio-checked {
+    background: #fff;
+    border-color: #fff;
+    color: #221d1d;
 }
 
 .ui-checkboxradio-label:hover {
-    background: #ccc !important;
-    color: #222 !important;
-    border-color: #067e43 !important;
+    background: rgba(255, 255, 255, .2) !important;
+    color: #fff !important;
+    border-color: #fff !important;
 }
 
 .ui-checkboxradio-label.ui-checkboxradio-checked:hover {
-    background: #143023 !important;
+    background: rgba(0, 0, 0, 0.65) !important;
     color: #fff !important;
+    border: 1px solid white;
 }
 
-.ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon,
-.ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
+.ui-checkboxradio-radio-label.ui-checkboxradio-checked .ui-icon, .ui-checkboxradio-radio-label.ui-checkboxradio-checked:hover .ui-icon {
     width: 16px;
     height: 16px;
-    /*border: none;*/
-    border-color: #fff;
-    background: #7c7c7c;
 }
