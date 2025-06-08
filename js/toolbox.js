@@ -1,5 +1,11 @@
 class JSTools {
 
+  /**
+   * Remove the given item from the array.
+   * Must match in a simple way.
+   * @param arr
+   * @param val
+   */
   static removeFromArray = (arr, val) => {
     let index = arr.indexOf(val);
     if (index !== -1) {
@@ -28,24 +34,57 @@ class JSTools {
       return arr;
   }
 
+  /**
+   * Return the given percentage of n.
+   * e.g. providing 50, 4 returns 2.
+   * @param percent
+   * @param n
+   * @returns {number}
+   */
   static proportion(percent, n) {
     return Math.round(percent / 100 * n);
   }
 
+  /**
+   * Return 1 for true or 0 for false.
+   * @param bool
+   * @returns {number}
+   */
   static boolToInt = (bool) => {
     return bool === true ? 1 : 0;
   }
 
+  /**
+   * Return the given word with œ replaced by oe.
+   * TODO This appears to be a specialized function that I kind of copied in here.
+   * @param w
+   * @returns {string}
+   */
   static normalizeWord = w => {
     /* sadge */
     return w.toLowerCase().replace('œ', 'oe');
   }
 
+  /**
+   * Return the given word with accents replaced by unaccented characters.
+   * @param w
+   * @returns {string}
+   */
   static asciiizeWord = w => {
     return JSTools.normalizeWord(w).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   }
 
-  // https://stackoverflow.com/a/55292366
+  /**
+   * https://stackoverflow.com/a/55292366
+   *
+   * Return the given string with the given character(s) trimmed from
+   * the start and/or the end.
+   * @param str
+   * @param chars Treated as a set of characters not to remove, not a block.
+   * @param fromStart If true, trim from the start. Default true.
+   * @param fromEnd If true, trim fromm the end. Default true.
+   * @returns {string|*}
+   */
   static trimChars(str, chars, fromStart, fromEnd) {
     if (typeof fromStart === undefined) {
       fromStart = true;
@@ -71,6 +110,13 @@ class JSTools {
     return (start > 0 || end < str.length) ? str.substring(start, end) : str;
   }
 
+  /**
+   * Rename the keys of the given object using the given remapping.
+   * e.g. o = {'d': 1} ; remapping = {'o': 'old'};
+   * changes o in place to {'old': 1}.
+   * @param o
+   * @param remapping
+   */
   static renameObjectKeys = (o, remapping) => {
     for (const [oldK, newK] of Object.entries(remapping)) {
       //o[newK] = o[oldK];
@@ -83,6 +129,12 @@ class JSTools {
     }
   };
 
+  /**
+   * Reverse the key/value pairs in the given object in place.
+   * Duplicate values overwrite previous keys.
+   * @param o
+   * @returns {{}}
+   */
   static swapObjectKeys = (o) => {
     return Object.keys(o).reduce((o2, key) => {
       o2[o[key]] = key;
