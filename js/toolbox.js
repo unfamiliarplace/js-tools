@@ -24,7 +24,7 @@ class JSTools {
       let j = 0;
 
       arr.forEach((e, i) => {
-        if (cb.call(e, i, arr, thisArg)) {
+        if (cb.call(thisArg, e, i, arr)) {
           if (i !== j) arr[j] = e;
           j++;
         }
