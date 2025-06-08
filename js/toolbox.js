@@ -146,29 +146,34 @@ class DOMTools {
 }
 
 class Random {
-  static shuffle(items, copy) {
+  /**
+   * Randomly shuffle the order of the given array.
+   * Shuffles in place by default. If copy is supplied and is ture,
+   * the original array is untouched and a copy is shuffled instead.
+   * In either case, return the modified array.
+   * @param arr
+   * @param copy
+   * @returns {*}
+   */
+  static shuffle(arr, copy) {
 
-    if (typeof copy === "undefined") {
-      copy = false;
-    }
-
-    if (copy) {
-      items = items.slice();
+    if (!! copy) {
+      arr = [...arr];
     }
 
     // Durstenfeld shuffle stackoverflow.com/a/12646864/5228348
-    for (let i = items.length - 1; i > 0; i--) {
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Random.integer(i);
-      [items[i], items[j]] = [items[j], items[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
 
     // for good measure
-    return items;
+    return arr;
   }
 
   /**
-   * Return a random integer between min and max.
-   * If only one of min or max is given, it is treated as max.
+   * Return a random integer between min and max, inclusive.
+   * If only parameter is given, it is treated as max, with a min of 0.
    * @param min
    * @param max
    * @returns {number}
@@ -181,15 +186,50 @@ class Random {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
+  /**
+   * Flip a "coin" that has the given chance of being true.
+   * If only one parameter is given, it's interpreted as a percentage, e.g. 50.
+   * If both are given, they're interpreted as a ratio, e.g. 1 : 2 = 50.
+   *
+   * Chances less than or equal to 0% always return false,
+   * and greater than or equal to 100% always return true.
+   * @param from
+   * @param to
+   */
+  static chance(from, to) {
+    if (typeof to === 'undefined') {
+      to = 100;
+    }
+
+    let pct = from / to * 100;
+    let roll = Random.integer(1, 100);
+    return roll <= pct;
+  }
+
+  /**
+   * Return a random item from the given array.
+   * If pop is true, also popo it from the array. Default false.
+   * @param arr
+   * @param pop
+   * @returns {any[]|*}
+   */
   static choice(arr, pop) {
     let i = Math.floor(Math.random() * arr.length);
-    if ((typeof pop !== 'undefined') && pop) {
+    if (!! pop) {
       return arr.splice(i, 1);
     } else {
       return arr[i];
     }
   }
 
+  /**
+   * Return a random hex colour code. Min and max are average brightness
+   * levels. e.g. with a max of 128, the colour will be at most half
+   * as bright as it could be.
+   * @param min
+   * @param max
+   * @returns {number[]}
+   */
   static colour(min, max) {
 
     if ((typeof min === "undefined") || (min < 0)) {
