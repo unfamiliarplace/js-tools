@@ -7,6 +7,27 @@ class JSTools {
     }
   }
 
+  /**
+   * https://stackoverflow.com/a/37319954
+   * @param arr The array to be filtered
+   * @param cb The callback function (true = keep, false = delete)
+   * @param thisArg Optional indicator of 'this' to be used in in cb??
+   * @returns {*}
+   */
+  static filterArrayInPlace = (arr, cb, thisArg) => {
+      let j = 0;
+
+      arr.forEach((e, i) => {
+        if (cb.call(e, i, arr, thisArg)) {
+          if (i !== j) arr[j] = e;
+          j++;
+        }
+      });
+
+      arr.length = j;
+      return arr;
+  }
+
   static proportion(percent, n) {
     return Math.round(percent / 100 * n);
   }
