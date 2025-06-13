@@ -617,6 +617,13 @@ class Jukebox {
     }
   }
 
+  loop(key) {
+    if (!this.disabled) {
+      this.sounds[key].loop = true;
+      this.sounds[key].play();
+    }
+  }
+
   pause(key) {
     if (!this.disabled) {
       this.sounds[key].pause();
@@ -627,6 +634,7 @@ class Jukebox {
     if (!this.disabled) {
       this.sounds[key].pause();
       this.sounds[key].currentTime = 0;
+      this.sounds[key].loop = false;
     }
   }
 
