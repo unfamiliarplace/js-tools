@@ -21,17 +21,17 @@ class JSTools {
    * @returns {*}
    */
   static filterArrayInPlace = (arr, cb, thisArg) => {
-      let j = 0;
+    let j = 0;
 
-      arr.forEach((e, i) => {
-        if (cb.call(thisArg, e, i, arr)) {
-          if (i !== j) arr[j] = e;
-          j++;
-        }
-      });
+    arr.forEach((e, i) => {
+      if (cb.call(thisArg, e, i, arr)) {
+        if (i !== j) arr[j] = e;
+        j++;
+      }
+    });
 
-      arr.length = j;
-      return arr;
+    arr.length = j;
+    return arr;
   }
 
   /**
@@ -389,9 +389,9 @@ class Copy {
     el.style.left = "-9999px";
     document.body.appendChild(el);
     const selected =
-      document.getSelection().rangeCount > 0
-        ? document.getSelection().getRangeAt(0)
-        : false;
+        document.getSelection().rangeCount > 0
+            ? document.getSelection().getRangeAt(0)
+            : false;
     el.select();
     document.execCommand("copy");
     document.body.removeChild(el);
@@ -634,6 +634,20 @@ class Jukebox {
     this.disabled = value;
   }
 
+  setAllVolumes(value) {
+    for (let k in this.sounds) {
+      this.sounds[k].volume = value / 100;
+    }
+  }
+
+  mute() {
+    this.setAllVolumes(0);
+  }
+
+  unmute() {
+    this.setAllVolumes(this.savedVolume);
+  }
+
   volume(value) {
     if (typeof value === 'undefined') {
       // get
@@ -642,9 +656,7 @@ class Jukebox {
     } else {
       // set
       this.savedVolume = value;
-      for (let k in this.sounds) {
-        this.sounds[k].volume = this.savedVolume / 100;
-      }
+      this.setAllVolumes(value);
     }
   }
 }
